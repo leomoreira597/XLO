@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:xlo_mobx/ui/login/login_screen.dart';
 
 
 class CustomDrawerHeader extends StatelessWidget {
@@ -7,7 +8,14 @@ class CustomDrawerHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return GestureDetector(
+      onTap: (){
+        Navigator.of(context).pop();
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => LoginScreen())
+        );
+      },
+      child: Container(
       color: Colors.purple,
       height: 94,
       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -46,6 +54,7 @@ class CustomDrawerHeader extends StatelessWidget {
             ),
         ),
       ],
+    ),
     ),
     );
   }

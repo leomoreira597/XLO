@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:xlo_mobx/componets/custom_drawer/page_tile.dart';
+import 'package:xlo_mobx/stores/page_store.dart';
 
 
 
 class PageSection extends StatelessWidget {
-  const PageSection({Key? key}) : super(key: key);
+ // const PageSection({Key? key}) : super(key: key);
+  final PageStore pageStore = GetIt.I<PageStore>();
 
   @override
   Widget build(BuildContext context) {
@@ -14,42 +17,40 @@ class PageSection extends StatelessWidget {
           label: 'Anuncios',
           iconData: Icons.list,
           onTap:(){
+            pageStore.setPage(0);
         },
-        highlighted: false
-        ),
-        PageTile(
-            label: 'Anuncios',
-            iconData: Icons.list,
-            onTap:(){
-            },
-            highlighted: false
+        highlighted: pageStore.page == 0,
         ),
         PageTile(
             label: 'Inserir Anuncios',
             iconData: Icons.edit,
             onTap:(){
+              pageStore.setPage(1);
             },
-            highlighted: false
+            highlighted: pageStore.page == 1,
         ),
         PageTile(
             label: 'Chat',
             iconData: Icons.chat,
             onTap:(){
+              pageStore.setPage(2);
             },
-            highlighted: false
+            highlighted: pageStore.page == 2,
         ),PageTile(
             label: 'Favoritos',
             iconData: Icons.favorite,
             onTap:(){
+              pageStore.setPage(3);
             },
-            highlighted: false
+            highlighted: pageStore.page == 3,
         ),
         PageTile(
             label: 'Minha Conta',
             iconData: Icons.person,
             onTap:(){
+              pageStore.setPage(4);
             },
-            highlighted: false
+            highlighted: pageStore.page == 4,
         ),
       ],
     );
