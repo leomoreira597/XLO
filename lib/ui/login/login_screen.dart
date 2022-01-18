@@ -16,122 +16,125 @@ class LoginScreen extends StatelessWidget {
       body: Container(
         alignment: Alignment.center,
         child: SingleChildScrollView(
-          child: Card(
-            margin: const EdgeInsets.symmetric(horizontal: 32),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
-            elevation: 8,
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    'Acessar com E-mail',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.grey
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 3, bottom: 4, top: 8),
-                    child: Text(
-                      'E-Mail',
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 16),
+            child: Card(
+              margin: const EdgeInsets.symmetric(horizontal: 32),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              elevation: 8,
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      'Acessar com E-mail',
+                      textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
+                          fontSize: 16,
+                          color: Colors.grey
                       ),
                     ),
-                  ),
-                  TextField(
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      isDense: true,
-                    ),
-                    keyboardType: TextInputType.emailAddress,
-                  ),
-                  SizedBox(height: 16,),
-                  Padding(
-                    padding: EdgeInsets.only(left: 3, bottom: 4,),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Senha',
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
-                          ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 3, bottom: 4, top: 8),
+                      child: Text(
+                        'E-Mail',
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
                         ),
-                        GestureDetector(
-                          child: Text(
-                            'Esqueceu sua senha?',
+                      ),
+                    ),
+                    TextField(
+                      decoration: InputDecoration(
+                        border: const OutlineInputBorder(),
+                        isDense: true,
+                      ),
+                      keyboardType: TextInputType.emailAddress,
+                    ),
+                    SizedBox(height: 16,),
+                    Padding(
+                      padding: EdgeInsets.only(left: 3, bottom: 4,),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Senha',
                             style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              color: Colors.purple,
+                              color: Colors.grey,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
                             ),
                           ),
-                          onTap: () {},
-                        ),
-                      ],
-                    ),
-                  ),
-                  TextField(
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      isDense: true,
-                    ),
-                    obscureText: true,
-                  ),
-                  Container(
-                    height: 40,
-                    margin: EdgeInsets.only(top: 20, bottom: 12),
-                    child: ElevatedButton(
-                      child: Text('ENTRAR'),
-                      style: ButtonStyle(
-                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0),
+                          GestureDetector(
+                            child: Text(
+                              'Esqueceu sua senha?',
+                              style: TextStyle(
+                                decoration: TextDecoration.underline,
+                                color: Colors.purple,
+                              ),
+                            ),
+                            onTap: () {},
                           ),
-                        ),
+                        ],
                       ),
-                      onPressed: () {},
                     ),
-                  ),
-                  Divider(color: Colors.black,),
-                  Padding(padding: EdgeInsets.symmetric(vertical: 8),
-                    child: Wrap(
-                      alignment: WrapAlignment.center,
-                      children: [
-                        Text('Não tem Conta?',
-                          style: TextStyle(
-                            fontSize: 16,
+                    TextField(
+                      decoration: InputDecoration(
+                        border: const OutlineInputBorder(),
+                        isDense: true,
+                      ),
+                      obscureText: true,
+                    ),
+                    Container(
+                      height: 40,
+                      margin: EdgeInsets.only(top: 20, bottom: 12),
+                      child: ElevatedButton(
+                        child: Text('ENTRAR'),
+                        style: ButtonStyle(
+                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20.0),
+                            ),
                           ),
                         ),
-                        GestureDetector(
-                          onTap: (){
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (_) => SingUpScreen(),
-                            ));
-                          },
-                          child: Text(
-                            'Cadastre-se!',
+                        onPressed: () {},
+                      ),
+                    ),
+                    Divider(color: Colors.black,),
+                    Padding(padding: EdgeInsets.symmetric(vertical: 8),
+                      child: Wrap(
+                        alignment: WrapAlignment.center,
+                        children: [
+                          Text('Não tem Conta?',
                             style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              color: Colors.purple,
                               fontSize: 16,
                             ),
                           ),
-                        ),
-                      ],
+                          GestureDetector(
+                            onTap: (){
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (_) => SingUpScreen(),
+                              ));
+                            },
+                            child: Text(
+                              'Cadastre-se!',
+                              style: TextStyle(
+                                decoration: TextDecoration.underline,
+                                color: Colors.purple,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
