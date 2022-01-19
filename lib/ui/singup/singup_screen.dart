@@ -57,58 +57,74 @@ class SingUpScreen extends StatelessWidget {
                       title: 'E-mail',
                       subtitle: 'Enviaremos um e-mail de confirmação',
                     ),
-                    TextField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Exemplo: leonardo@gmail.com',
-                        isDense: true,
-                      ),
-                      keyboardType: TextInputType.emailAddress,
-                      autocorrect: false,
-                    ),
+                    Observer(builder: (_){
+                      return TextField(
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: 'Exemplo: leonardo@gmail.com',
+                          isDense: true,
+                          errorText: singupStore.emailError,
+                        ),
+                        keyboardType: TextInputType.emailAddress,
+                        autocorrect: false,
+                        onChanged: singupStore.setEmail,
+                      );
+                    }),
                     SizedBox(height: 16,),
                     FieldTitle(
                       title: 'Celular',
                       subtitle: 'proteja sua conta',
                     ),
-                    TextField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Exemplo: (99) 99999-9999',
-                        isDense: true,
-                      ),
-                      keyboardType: TextInputType.phone,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly,
-                        TelefoneInputFormatter(),
-                      ],
-                    ),
+                    Observer(builder: (_){
+                      return TextField(
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: 'Exemplo: (99) 99999-9999',
+                          isDense: true,
+                          errorText: singupStore.phoneError,
+                        ),
+                        keyboardType: TextInputType.phone,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                          TelefoneInputFormatter(),
+                        ],
+                        onChanged: singupStore.setPhone,
+                      );
+                    }),
                     SizedBox(height: 16,),
                     FieldTitle(
                       title: 'Senha',
                       subtitle: 'Use letras, numeros e caracteres especiais',
                     ),
-                    TextField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Crie sua Senha',
-                        isDense: true
-                      ),
-                      obscureText: true,
-                    ),
+                    Observer(builder: (_){
+                      return TextField(
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: 'Crie sua Senha',
+                          isDense: true,
+                          errorText: singupStore.pass1Error,
+                        ),
+                        obscureText: true,
+                        onChanged: singupStore.setPass1,
+                      );
+                    }),
                     SizedBox(height: 16,),
                     FieldTitle(
                       title: 'Confirmar senha',
                       subtitle: 'Repita a senha',
                     ),
-                    TextField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Repita sua Senha',
-                        isDense: true
-                      ),
-                      obscureText: true,
-                    ),
+                    Observer(builder: (_){
+                      return TextField(
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: 'Repita sua Senha',
+                            isDense: true,
+                            errorText: singupStore.pass2Error
+                        ),
+                        obscureText: true,
+                        onChanged: singupStore.setPass2,
+                      );
+                    }),
                     Container(
                       height: 40,
                       margin: EdgeInsets.only(top: 20, bottom: 12),
