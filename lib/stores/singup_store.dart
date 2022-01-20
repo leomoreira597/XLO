@@ -107,5 +107,24 @@ abstract class _SingupStore with Store{
     }
   }
 
+  @computed
+  bool get isFormValid => validName && emailValid && phoneValid && pass1Valid && pass2Valid;
+
+  @computed
+  dynamic get singupPressed => isFormValid ? _singup : null;
+
+  @observable
+  bool loading = false;
+
+  @action
+  Future<void> _singup() async{
+    loading = true;
+    await Future.delayed(Duration(seconds: 3));
+
+    loading = false;
+
+  }
+
+
 
 }

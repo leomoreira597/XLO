@@ -43,6 +43,20 @@ mixin _$SingupStore on _SingupStore, Store {
       (_$pass2ValidComputed ??= Computed<bool>(() => super.pass2Valid,
               name: '_SingupStore.pass2Valid'))
           .value;
+  Computed<bool>? _$isFormValidComputed;
+
+  @override
+  bool get isFormValid =>
+      (_$isFormValidComputed ??= Computed<bool>(() => super.isFormValid,
+              name: '_SingupStore.isFormValid'))
+          .value;
+  Computed<dynamic>? _$singupPressedComputed;
+
+  @override
+  dynamic get singupPressed =>
+      (_$singupPressedComputed ??= Computed<dynamic>(() => super.singupPressed,
+              name: '_SingupStore.singupPressed'))
+          .value;
 
   final _$nameAtom = Atom(name: '_SingupStore.name');
 
@@ -119,6 +133,28 @@ mixin _$SingupStore on _SingupStore, Store {
     });
   }
 
+  final _$loadingAtom = Atom(name: '_SingupStore.loading');
+
+  @override
+  bool get loading {
+    _$loadingAtom.reportRead();
+    return super.loading;
+  }
+
+  @override
+  set loading(bool value) {
+    _$loadingAtom.reportWrite(value, super.loading, () {
+      super.loading = value;
+    });
+  }
+
+  final _$_singupAsyncAction = AsyncAction('_SingupStore._singup');
+
+  @override
+  Future<void> _singup() {
+    return _$_singupAsyncAction.run(() => super._singup());
+  }
+
   final _$_SingupStoreActionController = ActionController(name: '_SingupStore');
 
   @override
@@ -184,11 +220,14 @@ email: ${email},
 phone: ${phone},
 pass1: ${pass1},
 pass2: ${pass2},
+loading: ${loading},
 validName: ${validName},
 emailValid: ${emailValid},
 phoneValid: ${phoneValid},
 pass1Valid: ${pass1Valid},
-pass2Valid: ${pass2Valid}
+pass2Valid: ${pass2Valid},
+isFormValid: ${isFormValid},
+singupPressed: ${singupPressed}
     ''';
   }
 }

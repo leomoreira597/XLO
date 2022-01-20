@@ -43,6 +43,7 @@ class SingUpScreen extends StatelessWidget {
                     ),
                     Observer(builder: (_){
                       return TextField(
+                        enabled: !singupStore.loading,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           hintText: 'Exemplo: Leonardo Moreira da Silva',
@@ -59,6 +60,7 @@ class SingUpScreen extends StatelessWidget {
                     ),
                     Observer(builder: (_){
                       return TextField(
+                        enabled: !singupStore.loading,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           hintText: 'Exemplo: leonardo@gmail.com',
@@ -77,6 +79,7 @@ class SingUpScreen extends StatelessWidget {
                     ),
                     Observer(builder: (_){
                       return TextField(
+                        enabled: !singupStore.loading,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           hintText: 'Exemplo: (99) 99999-9999',
@@ -98,6 +101,7 @@ class SingUpScreen extends StatelessWidget {
                     ),
                     Observer(builder: (_){
                       return TextField(
+                        enabled: !singupStore.loading,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           hintText: 'Crie sua Senha',
@@ -115,6 +119,7 @@ class SingUpScreen extends StatelessWidget {
                     ),
                     Observer(builder: (_){
                       return TextField(
+                        enabled: !singupStore.loading,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             hintText: 'Repita sua Senha',
@@ -125,21 +130,25 @@ class SingUpScreen extends StatelessWidget {
                         onChanged: singupStore.setPass2,
                       );
                     }),
-                    Container(
-                      height: 40,
-                      margin: EdgeInsets.only(top: 20, bottom: 12),
-                      child: ElevatedButton(
-                        child: Text('Cadastrar'),
-                        style: ButtonStyle(
-                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
+                    Observer(builder: (_){
+                      return Container(
+                        height: 40,
+                        margin: EdgeInsets.only(top: 20, bottom: 12),
+                        child: ElevatedButton(
+                          child: singupStore.loading ? CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation(Colors.white),
+                          ) : Text('Cadastrar'),
+                          style: ButtonStyle(
+                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
                             ),
                           ),
+                          onPressed: singupStore.singupPressed(),
                         ),
-                        onPressed: () {},
-                      ),
-                    ),
+                      );
+                    }),
                     Divider(color: Colors.black,),
                     Padding(padding: EdgeInsets.symmetric(vertical: 8),
                       child: Wrap(
