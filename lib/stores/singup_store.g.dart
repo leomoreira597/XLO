@@ -213,6 +213,17 @@ mixin _$SingupStore on _SingupStore, Store {
   }
 
   @override
+  void retorna() {
+    final _$actionInfo = _$_SingupStoreActionController.startAction(
+        name: '_SingupStore.retorna');
+    try {
+      return super.retorna();
+    } finally {
+      _$_SingupStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 name: ${name},

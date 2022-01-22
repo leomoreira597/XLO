@@ -135,7 +135,7 @@ class SingUpScreen extends StatelessWidget {
                         height: 40,
                         margin: EdgeInsets.only(top: 20, bottom: 12),
                         child: ElevatedButton(
-                          child: singupStore.loading ? CircularProgressIndicator(
+                          child: singupStore.loading ? const CircularProgressIndicator(
                             valueColor: AlwaysStoppedAnimation(Colors.white),
                           ) : Text('Cadastrar'),
                           style: ButtonStyle(
@@ -145,7 +145,7 @@ class SingUpScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          onPressed: singupStore.singupPressed(),
+                          onPressed: () => singupStore.singupPressed(),
                         ),
                       );
                     }),

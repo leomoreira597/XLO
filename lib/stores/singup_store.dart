@@ -111,7 +111,7 @@ abstract class _SingupStore with Store{
   bool get isFormValid => validName && emailValid && phoneValid && pass1Valid && pass2Valid;
 
   @computed
-  dynamic get singupPressed => isFormValid ? _singup : null;
+  dynamic get singupPressed => (isFormValid && !loading) ? _singup : retorna;
 
   @observable
   bool loading = false;
@@ -119,12 +119,15 @@ abstract class _SingupStore with Store{
   @action
   Future<void> _singup() async{
     loading = true;
-    await Future.delayed(Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 3));
 
     loading = false;
-
   }
 
+  @action
+  void retorna(){
+    return;
+  }
 
 
 }
