@@ -148,6 +148,21 @@ mixin _$SingupStore on _SingupStore, Store {
     });
   }
 
+  final _$errorAtom = Atom(name: '_SingupStore.error');
+
+  @override
+  String? get error {
+    _$errorAtom.reportRead();
+    return super.error;
+  }
+
+  @override
+  set error(String? value) {
+    _$errorAtom.reportWrite(value, super.error, () {
+      super.error = value;
+    });
+  }
+
   final _$_singupAsyncAction = AsyncAction('_SingupStore._singup');
 
   @override
@@ -232,6 +247,7 @@ phone: ${phone},
 pass1: ${pass1},
 pass2: ${pass2},
 loading: ${loading},
+error: ${error},
 validName: ${validName},
 emailValid: ${emailValid},
 phoneValid: ${phoneValid},

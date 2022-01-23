@@ -113,15 +113,22 @@ abstract class _SingupStore with Store {
   @observable
   bool loading = false;
 
+  @observable
+  String? error;
+
   @action
   Future<void> _singup() async {
     loading = true;
     final user = User(name: name, eMail: email, phone: phone, password: pass1);
-
-    await UserRepository().singup(user);
-
-    loading = false;
-  }
+    try {
+      final resultUser = await UserRepository().singup(user);
+      print(resultUser);
+    }
+    catch (e) {
+      error = e as String?;
+    }
+      loading = false;
+    }
 
   @action
   void retorna() {
