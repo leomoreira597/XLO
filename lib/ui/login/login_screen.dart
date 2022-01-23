@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:xlo_mobx/stores/login_store.dart';
 import 'package:xlo_mobx/ui/home/home_screen.dart';
 import 'package:xlo_mobx/ui/singup/singup_screen.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  //const LoginScreen({Key? key}) : super(key: key);
+
+  final LoginStore loginStore = LoginStore();
 
   @override
   Widget build(BuildContext context) {
@@ -49,13 +53,18 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    TextField(
-                      decoration: InputDecoration(
-                        border: const OutlineInputBorder(),
-                        isDense: true,
-                      ),
-                      keyboardType: TextInputType.emailAddress,
-                    ),
+                    Observer(builder: (_){
+                      return TextField(
+                        enabled: !loginStore.loading,
+                        decoration: InputDecoration(
+                            border: const OutlineInputBorder(),
+                            isDense: true,
+                            errorText: loginStore.emailError
+                        ),
+                        keyboardType: TextInputType.emailAddress,
+                        onChanged: loginStore.setEmail,
+                      );
+                    }),
                     SizedBox(height: 16,),
                     Padding(
                       padding: EdgeInsets.only(left: 3, bottom: 4,),
@@ -83,28 +92,37 @@ class LoginScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    TextField(
-                      decoration: InputDecoration(
-                        border: const OutlineInputBorder(),
-                        isDense: true,
-                      ),
-                      obscureText: true,
-                    ),
-                    Container(
-                      height: 40,
-                      margin: EdgeInsets.only(top: 20, bottom: 12),
-                      child: ElevatedButton(
-                        child: Text('ENTRAR'),
-                        style: ButtonStyle(
-                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
+                    Observer(builder: (_){
+                      return TextField(
+                        enabled: !loginStore.loading,
+                        decoration: InputDecoration(
+                          border: const OutlineInputBorder(),
+                          isDense: true,
+                          errorText: loginStore.passWordError,
+                        ),
+                        obscureText: true,
+                        onChanged: loginStore.setPassword,
+                      );
+                    }),
+                    Observer(builder: (_){
+                      return Container(
+                        height: 40,
+                        margin: EdgeInsets.only(top: 20, bottom: 12),
+                        child: ElevatedButton(
+                          child: loginStore.loading ? CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation(Colors.white),
+                          ) : Text('ENTRAR'),
+                          style: ButtonStyle(
+                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
                             ),
                           ),
+                          onPressed: () => loginStore.loginPressed(),
                         ),
-                        onPressed: () {},
-                      ),
-                    ),
+                      );
+                    }),
                     Divider(color: Colors.black,),
                     Padding(padding: EdgeInsets.symmetric(vertical: 8),
                       child: Wrap(
