@@ -1,12 +1,13 @@
 import 'package:mobx/mobx.dart';
 import 'package:xlo_mobx/helperes/extensions.dart';
+import 'package:xlo_mobx/models/user.dart';
+import 'package:xlo_mobx/reposttory/user_repository.dart';
 
 part 'singup_store.g.dart';
 
 class SingupStore = _SingupStore with _$SingupStore;
 
-abstract class _SingupStore with Store{
-
+abstract class _SingupStore with Store {
   @observable
   String? name;
 
@@ -14,17 +15,16 @@ abstract class _SingupStore with Store{
   void setName(String value) => name = value;
 
   @computed
-  bool get validName => name!= null &&  name!.length > 6;
-  String? get nameError{
-   if(name == null || validName){
-     return null ;
-   }
-   else if (name!.isEmpty){
-     return 'Campo obrigatório';
-   }
-   else{
-     return 'Nome muito curto';
-   }
+  bool get validName => name != null && name!.length > 6;
+
+  String? get nameError {
+    if (name == null || validName) {
+      return null;
+    } else if (name!.isEmpty) {
+      return 'Campo obrigatório';
+    } else {
+      return 'Nome muito curto';
+    }
   }
 
   @observable
@@ -35,14 +35,13 @@ abstract class _SingupStore with Store{
 
   @computed
   bool get emailValid => email != null && email!.isEmailValid();
-  String? get emailError{
-    if(email == null || emailValid){
+
+  String? get emailError {
+    if (email == null || emailValid) {
       return null;
-    }
-    else if(email!.isEmpty){
+    } else if (email!.isEmpty) {
       return 'Campo obrigatório';
-    }
-    else{
+    } else {
       return 'E-mail invalido';
     }
   }
@@ -55,14 +54,13 @@ abstract class _SingupStore with Store{
 
   @computed
   bool get phoneValid => phone != null && phone!.length >= 14;
-  String? get phoneError{
-    if(phone == null || phoneValid){
+
+  String? get phoneError {
+    if (phone == null || phoneValid) {
       return null;
-    }
-    else if(phone!.isEmpty){
+    } else if (phone!.isEmpty) {
       return 'Campo Obrigatório';
-    }
-    else {
+    } else {
       return 'Celular inválido';
     }
   }
@@ -75,14 +73,13 @@ abstract class _SingupStore with Store{
 
   @computed
   bool get pass1Valid => pass1 != null && pass1!.length >= 6;
-  String? get pass1Error{
-    if(pass1 == null || pass1Valid){
+
+  String? get pass1Error {
+    if (pass1 == null || pass1Valid) {
       return null;
-    }
-    else if(pass1!.isEmpty){
+    } else if (pass1!.isEmpty) {
       return 'Campo Obrigatório';
-    }
-    else {
+    } else {
       return 'Senha muito curta';
     }
   }
@@ -95,20 +92,20 @@ abstract class _SingupStore with Store{
 
   @computed
   bool get pass2Valid => pass2 != null && pass2 == pass1;
-  String? get pass2Error{
-    if(pass2 == null || pass2Valid){
+
+  String? get pass2Error {
+    if (pass2 == null || pass2Valid) {
       return null;
-    }
-    else if(pass2!.isEmpty){
+    } else if (pass2!.isEmpty) {
       return 'Campo Obrigatório';
-    }
-    else {
+    } else {
       return 'Senhas não concidem';
     }
   }
 
   @computed
-  bool get isFormValid => validName && emailValid && phoneValid && pass1Valid && pass2Valid;
+  bool get isFormValid =>
+      validName && emailValid && phoneValid && pass1Valid && pass2Valid;
 
   @computed
   dynamic get singupPressed => (isFormValid && !loading) ? _singup : retorna;
@@ -117,17 +114,17 @@ abstract class _SingupStore with Store{
   bool loading = false;
 
   @action
-  Future<void> _singup() async{
+  Future<void> _singup() async {
     loading = true;
-    await Future.delayed(const Duration(seconds: 3));
+    final user = User(name: name, eMail: email, phone: phone, password: pass1);
+
+    await UserRepository().singup(user);
 
     loading = false;
   }
 
   @action
-  void retorna(){
+  void retorna() {
     return;
   }
-
-
 }
