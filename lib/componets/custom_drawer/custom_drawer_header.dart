@@ -43,7 +43,8 @@ class CustomDrawerHeader extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                    userManagerStore.isLoggedIn ? userManagerStore.user!.name.toString() :
+                    userManagerStore.isLoggedIn ?
+                    userManagerStore.user!.name.toString() :
                     'Acesse sua conta agora',
                     style: TextStyle(
                       color: Colors.white,
