@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:xlo_mobx/componets/error_box.dart';
 import 'package:xlo_mobx/stores/login_store.dart';
 import 'package:xlo_mobx/ui/home/home_screen.dart';
 import 'package:xlo_mobx/ui/singup/singup_screen.dart';
@@ -42,6 +43,14 @@ class LoginScreen extends StatelessWidget {
                           color: Colors.grey
                       ),
                     ),
+                    Observer(builder: (_){
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 8),
+                        child: ErrorBox(
+                          message: loginStore.error,
+                        ),
+                      );
+                    }),
                     Padding(
                       padding: EdgeInsets.only(left: 3, bottom: 4, top: 8),
                       child: Text(

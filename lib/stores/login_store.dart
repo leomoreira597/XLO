@@ -1,5 +1,8 @@
+import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
 import 'package:xlo_mobx/helperes/extensions.dart';
+import 'package:xlo_mobx/reposttory/user_repository.dart';
+import 'package:xlo_mobx/stores/user_manager_store.dart';
 
 part 'login_store.g.dart';
 
@@ -33,12 +36,19 @@ abstract class _LoginStore with Store{
   @observable
   bool loading = false;
 
+  @observable
+  String? error;
+
   @action
   Future<void> login()async{
     loading = true;
-
-    await Future.delayed(Duration(seconds: 3));
-
+    try {
+      final user = await UserRepository().loginWithEmail(eMail, password);
+      GetIt.I<UserManagerStore>().setUser(user);
+    }
+    catch (e){
+      error = e as String?;
+    }
     loading = false;
   }
 
