@@ -67,6 +67,6 @@ class ImageSourceModel extends StatelessWidget {
         doneButtonTitle: 'Concluir'
       ),
     );
-    onImageSelected(cropeedFile);
+    if(cropeedFile != null)onImageSelected(cropeedFile);
   }
 }
