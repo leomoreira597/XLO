@@ -6,8 +6,10 @@ import 'package:xlo_mobx/componets/image_source_modal.dart';
 import 'package:xlo_mobx/stores/create_store.dart';
 class ImagesField extends StatelessWidget {
 
-  const ImagesField(CreateStore createStore, {Key? key, this.createStore}) : super(key: key);
+  ImagesField(this.createStore);
+  //const ImagesField(CreateStore createStore, {Key? key, this.createStore}) : super(key: key);
   final CreateStore createStore;
+
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +67,7 @@ class ImagesField extends StatelessWidget {
                   },
                   child: CircleAvatar(
                     radius: 44,
-                    backgroundImage: FileImage(createStore.images[index]),
+                    backgroundImage: FileImage(createStore!.images[index]),
                   ),
                 ),
               );
