@@ -19,7 +19,7 @@ class ImageDialog extends StatelessWidget {
               Navigator.of(context).pop();
               onDelete();
             },
-            child: Text(
+            child: const Text(
               'Excluir',
               style: TextStyle(
                 color: Colors.red,

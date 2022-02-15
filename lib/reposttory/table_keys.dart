@@ -5,3 +5,6 @@ const keyUserPhone = 'phone';
 const keyUserPassword = 'password';
 const keyUserType = 'type';
 const keyUserCreatedAt = 'createdAt';
+
+const keyCategoriesTable = 'Categories';
+const keyCategoryDescription = 'description';

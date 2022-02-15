@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:parse_server_sdk_flutter/generated/i18n.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
+import 'package:xlo_mobx/reposttory/category_repository.dart';
+import 'package:xlo_mobx/stores/category_store.dart';
 import 'package:xlo_mobx/stores/page_store.dart';
 import 'package:xlo_mobx/stores/user_manager_store.dart';
 import 'package:xlo_mobx/ui/base/base_screen.dart';
+import 'package:xlo_mobx/ui/category/category_screen.dart';
 
 
 void main() async{
@@ -18,6 +21,7 @@ void main() async{
 void setUpLocators(){
   GetIt.I.registerSingleton(PageStore());
   GetIt.I.registerSingleton(UserManagerStore());
+  GetIt.I.registerSingleton(CategoryStore());
 }
 
 Future<void> initialzeParse() async{
@@ -25,7 +29,8 @@ Future<void> initialzeParse() async{
       'https://parseapi.back4app.com/',
       clientKey: '2P5NdRmCgJsZjfWDXwhjdFX26b0ycJsG6HxBMJ7m',
       autoSendSessionId: true,
-      debug: true);
+      debug: true
+  );
 }
 
 class MyApp extends StatelessWidget {
