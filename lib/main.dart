@@ -17,7 +17,7 @@ void main() async{
   setUpLocators();
   runApp(MyApp());
 
-  IBGERepository().getUFListFromAPI().then((value) => print(value));
+  IBGERepository().getUFList().then((value) {});
 
 }
 
