@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:parse_server_sdk_flutter/generated/i18n.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:xlo_mobx/reposttory/category_repository.dart';
+import 'package:xlo_mobx/reposttory/cep_repository.dart';
 import 'package:xlo_mobx/reposttory/ibge_repository.dart';
 import 'package:xlo_mobx/stores/category_store.dart';
 import 'package:xlo_mobx/stores/page_store.dart';
@@ -16,8 +17,6 @@ void main() async{
   await initialzeParse();
   setUpLocators();
   runApp(MyApp());
-
-  IBGERepository().getUFList().then((value) {});
 
 }
 
