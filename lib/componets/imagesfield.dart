@@ -91,19 +91,28 @@ class ImagesField extends StatelessWidget {
             },
           ),
         ),
-        if(createStore.imagesError != null)
-          Container(
-            child: Container(
-              child: Text(
-              createStore.imagesError as String,
-              style: TextStyle(
-                color: Colors.red,
-                fontSize: 12,
-              ),
-              )
-            ) ,
-          )
-
+        Observer(builder: (_){
+          if(createStore.imagesError != null)
+            return Container(
+              child: Container(
+                  alignment: Alignment.centerLeft,
+                  decoration: BoxDecoration(
+                    border: Border(
+                      top: BorderSide(color: Colors.red),
+                    ),
+                  ),
+                  padding: const EdgeInsets.fromLTRB(16, 8, 0, 8),
+                  child: Text(
+                    createStore.imagesError as String,
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 12,
+                    ),
+                  )
+              ) ,
+            );
+          else return Container();
+        }),
       ],
     );
   }

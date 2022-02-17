@@ -2,6 +2,7 @@ import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:xlo_mobx/componets/category_field.dart';
 import 'package:xlo_mobx/componets/cep_field.dart';
 import 'package:xlo_mobx/componets/custom_drawer/custom_drawer.dart';
@@ -47,21 +48,29 @@ class CreateScreen extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 ImagesField(createStore),
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Titulo *',
-                    labelStyle: labelStlye,
-                    contentPadding: contentPadding,
-                  ),
-                ),
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Descrição *',
-                    labelStyle: labelStlye,
-                    contentPadding: contentPadding,
-                  ),
-                  maxLines: null,
-                ),
+                Observer(builder: (_){
+                  return TextFormField(
+                    onChanged: createStore.setTitle,
+                    decoration: InputDecoration(
+                      labelText: 'Titulo *',
+                      labelStyle: labelStlye,
+                      contentPadding: contentPadding,
+                      errorText: createStore.titleError,
+                    ),
+                  );
+                }),
+                Observer(builder: (_){
+                  return TextFormField(
+                    onChanged: createStore.setDescription,
+                    decoration: InputDecoration(
+                      labelText: 'Descrição *',
+                      labelStyle: labelStlye,
+                      contentPadding: contentPadding,
+                      errorText: createStore.descriptionError,
+                    ),
+                    maxLines: null,
+                  );
+                }),
                 CategoryField(createStore),
                 CepField(),
                 TextFormField(
