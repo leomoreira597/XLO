@@ -19,13 +19,13 @@ mixin _$CepStore on _CepStore, Store {
   final _$cepAtom = Atom(name: '_CepStore.cep');
 
   @override
-  String? get cep {
+  String get cep {
     _$cepAtom.reportRead();
     return super.cep;
   }
 
   @override
-  set cep(String? value) {
+  set cep(String value) {
     _$cepAtom.reportWrite(value, super.cep, () {
       super.cep = value;
     });

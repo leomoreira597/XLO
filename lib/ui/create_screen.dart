@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:xlo_mobx/componets/category_field.dart';
 import 'package:xlo_mobx/componets/cep_field.dart';
 import 'package:xlo_mobx/componets/custom_drawer/custom_drawer.dart';
+import 'package:xlo_mobx/componets/hide_phone_field.dart';
 import 'package:xlo_mobx/componets/imagesfield.dart';
 import 'package:xlo_mobx/stores/create_store.dart';
 
@@ -31,15 +32,18 @@ class CreateScreen extends StatelessWidget {
         title: Text('Criar anuncio'),
         centerTitle: true,
       ),
-      body: Card(
-          clipBehavior: Clip.antiAlias,
-          margin: EdgeInsets.symmetric(horizontal: 16),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
-          elevation: 8,
-          child: SingleChildScrollView(
+      body: Container(
+        alignment: Alignment.center,
+        child: SingleChildScrollView(
+          child: Card(
+            clipBehavior: Clip.antiAlias,
+            margin: EdgeInsets.symmetric(horizontal: 16),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            elevation: 8,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisSize: MainAxisSize.min,
               children: [
                 ImagesField(createStore),
@@ -73,9 +77,25 @@ class CreateScreen extends StatelessWidget {
                     CentavosInputFormatter(),
                   ],
                 ),
+                HidePhoneField(createStore),
+                SizedBox(
+                  height: 50,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Text(
+                      'Enviar',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
-          )),
+          ),
+        ),
+      ),
     );
   }
 }
