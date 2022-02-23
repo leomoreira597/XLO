@@ -7,7 +7,7 @@ enum AdStatus {PENDING, ACTIVE, SOLD, DELETED}
 class AD{
 
   String? id;
-  List? images;
+  List images = [];
   String? title;
   String? description;
   Category? category;

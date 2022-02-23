@@ -44,6 +44,7 @@ dependencies:
   image_cropper: ^1.4.1
   dio: ^4.0.4
   shared_preferences: ^2.0.13
+  path: ^1.8.0
 
 
 
