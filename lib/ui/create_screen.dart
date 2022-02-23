@@ -14,6 +14,7 @@ class CreateScreen extends StatelessWidget {
   //const CreateScreen({Key? key}) : super(key: key);
   final CreateStore createStore = CreateStore();
 
+
   @override
   Widget build(BuildContext context) {
     final labelStlye = TextStyle(
@@ -91,19 +92,24 @@ class CreateScreen extends StatelessWidget {
                   );
                 }),
                 HidePhoneField(createStore),
-                SizedBox(
-                  height: 50,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Enviar',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
+                Observer(builder: (_){
+                  return SizedBox(
+                    height: 50,
+                    child: GestureDetector(
+                      onTap: createStore.invalidSendPressed,
+                      child: ElevatedButton(
+                        onPressed: createStore.senPressed,
+                        child: Text(
+                          'Enviar',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
+                  );
+                }),
               ],
             ),
           ),
