@@ -72,20 +72,24 @@ class CreateScreen extends StatelessWidget {
                   );
                 }),
                 CategoryField(createStore),
-                CepField(),
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Preço *',
-                    labelStyle: labelStlye,
-                    contentPadding: contentPadding,
-                    prefixText: 'R\$ ',
-                  ),
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.digitsOnly,
-                    CentavosInputFormatter(),
-                  ],
-                ),
+                CepField(createStore),
+                Observer(builder: (_){
+                   return TextFormField(
+                    onChanged: createStore.setPrice,
+                    decoration: InputDecoration(
+                      labelText: 'Preço *',
+                      labelStyle: labelStlye,
+                      contentPadding: contentPadding,
+                      prefixText: 'R\$ ',
+                      errorText: createStore.priceError,
+                    ),
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      CentavosInputFormatter(),
+                    ],
+                  );
+                }),
                 HidePhoneField(createStore),
                 SizedBox(
                   height: 50,

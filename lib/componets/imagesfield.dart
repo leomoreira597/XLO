@@ -101,7 +101,7 @@ class ImagesField extends StatelessWidget {
                       top: BorderSide(color: Colors.red),
                     ),
                   ),
-                  padding: const EdgeInsets.fromLTRB(16, 8, 0, 8),
+                  padding: const EdgeInsets.fromLTRB(16, 8, 0, 0),
                   child: Text(
                     createStore.imagesError as String,
                     style: TextStyle(

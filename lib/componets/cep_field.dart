@@ -3,46 +3,53 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:xlo_mobx/stores/cep_store.dart';
+import 'package:xlo_mobx/stores/create_store.dart';
 
 class CepField extends StatelessWidget {
   //const CepField({Key? key}) : super(key: key);
-  final CepStore cepStore = CepStore();
+  CepField(this.createStore) : cepStore = createStore.cepStore;
+
+  final CreateStore createStore;
+  final CepStore? cepStore ;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        TextFormField(
-          onChanged: cepStore.setCep,
-          keyboardType: TextInputType.number,
-          inputFormatters: [
-            FilteringTextInputFormatter.digitsOnly,
-            CepInputFormatter(),
-          ],
-          decoration: InputDecoration(
-            labelText: 'CEP *',
-            labelStyle: TextStyle(
-              fontWeight: FontWeight.w800,
-              color: Colors.grey,
-              fontSize: 18,
-            ),
-            contentPadding: const EdgeInsets.fromLTRB(16, 10, 12, 10),
-          ),
-        ),
         Observer(builder: (_){
-          if(cepStore.address == null && cepStore.error == null && !cepStore.loading)
+          return         TextFormField(
+            onChanged: cepStore!.setCep,
+            keyboardType: TextInputType.number,
+            inputFormatters: [
+              FilteringTextInputFormatter.digitsOnly,
+              CepInputFormatter(),
+            ],
+            decoration: InputDecoration(
+              errorText:  createStore.addressError,
+              labelText: 'CEP *',
+              labelStyle: TextStyle(
+                fontWeight: FontWeight.w800,
+                color: Colors.grey,
+                fontSize: 18,
+              ),
+              contentPadding: const EdgeInsets.fromLTRB(16, 10, 12, 10),
+            ),
+          );
+        }),
+        Observer(builder: (_){
+          if(cepStore!.address == null && cepStore!.error == null && !cepStore!.loading)
             return Container();
-          else if(cepStore.address == null && cepStore.error == null)
+          else if(cepStore!.address == null && cepStore!.error == null)
             return LinearProgressIndicator();
-          else if(cepStore.error != null)
+          else if(cepStore!.error != null)
             return Container(
               color: Colors.red.withAlpha(100),
               height: 50,
               padding: const EdgeInsets.all(8),
               alignment: Alignment.center,
               child: Text(
-                cepStore.error as String,
+                cepStore!.error as String,
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                   color: Colors.red,
@@ -50,7 +57,7 @@ class CepField extends StatelessWidget {
               ),
             );
           else{
-            final a = cepStore.address;
+            final a = cepStore!.address;
             return Container(
               color: Colors.purple.withAlpha(150),
               height: 50,
